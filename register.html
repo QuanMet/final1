@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo tài khoản</title>
+
+  <!-- Liên kết CSS ngoài -->
+  <link rel="stylesheet" href="style-desktop.css">
+  <link rel="stylesheet" href="style-mobile.css" media="(max-width: 480px)">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- CSS riêng cho trang register -->
+  <style>
+    body.login-body {
+      background-image: url('background-login.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body.login-body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 240, 200, 0.3);
+      z-index: -1;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 245, 0.92);
+      padding: 32px 28px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      color: #5a3e2b;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      color: #5a3e2b;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 6px;
+      display: block;
+      text-align: left;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cdb79e;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      box-sizing: border-box;
+    }
+
+    .btn.login-btn {
+      background-color: #8c5e38;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn.login-btn:hover {
+      background-color: #6f472a;
+    }
+
+    .forgot-password a {
+      font-size: 13px;
+      color: #8c5e38;
+      text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+      text-decoration: underline;
+    }
+
+    .create-account-btn {
+      background-color: #d3a762;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .create-account-btn:hover {
+      background-color: #b68e4e;
+    }
+  </style>
+</head>
+
+<body class="login-body">
+
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Tạo tài khoản</h2>
+      <form id="regform" method="post" onsubmit="return validateForm()" class="form-content">
+        <div class="input-group">
+          <label for="sid">User ID (Email)</label>
+          <input id="sid" type="text" name="sid" placeholder="Nhập User ID" required pattern="^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|yahoo\.com)$" title="Email phải có đuôi @gmail.com, @hotmail.com hoặc @yahoo.com" />
+        </div>
+
+        <div class="input-group">
+          <label for="pwd1">Mật khẩu</label>
+          <input id="pwd1" type="password" name="pwd1" placeholder="Nhập mật khẩu" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$" title="Mật khẩu phải có ít nhất 1 chữ hoa, 1 chữ thường, 1 ký tự đặc biệt và ít nhất 8 ký tự" />
+        </div>
+
+        <div class="input-group">
+          <label for="pwd2">Nhập lại mật khẩu</label>
+          <input id="pwd2" type="password" name="pwd2" placeholder="Nhập lại mật khẩu" required />
+        </div>
+
+        <div class="input-group">
+          <label for="uname">Họ và tên</label>
+          <input id="uname" type="text" name="uname" placeholder="Nhập họ và tên" required pattern="^[a-zA-Z\s]+$" title="Tên không được chứa số, chỉ cho phép chữ cái và dấu cách." />
+        </div>
+
+        <div class="input-group">
+          <label>Giới tính</label>
+          <div style="display: flex; gap: 20px; align-items: center; justify-content: center;">
+            <label><input type="radio" name="gender" value="M" required> Nam</label>
+            <label><input type="radio" name="gender" value="F"> Nữ</label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn login-btn">Đăng ký</button>
+
+        <div class="forgot-password">
+          <a href="login.html" class="create-account-btn">Đã có tài khoản? Đăng nhập</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<script>
+  function validateForm() {
+    var email = document.getElementById('sid').value;
+    var password1 = document.getElementById('pwd1').value;
+    var password2 = document.getElementById('pwd2').value;
+    var name = document.getElementById('uname').value;
+
+    if (password1 !== password2) {
+      alert("Mật khẩu không khớp!");
+      return false;
+    }
+
+    var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+    if (!passwordPattern.test(password1)) {
+      alert("Mật khẩu phải bao gồm ít nhất một chữ hoa, một chữ thường, một ký tự đặc biệt và có ít nhất 8 ký tự.");
+      return false;
+    }
+
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com|yahoo\.com)$/;
+    if (!emailPattern.test(email)) {
+      alert("Email phải có đuôi @gmail.com, @hotmail.com hoặc @yahoo.com.");
+      return false;
+    }
+
+    var namePattern = /^[a-zA-Z\s]+$/;
+    if (!namePattern.test(name)) {
+      alert("Tên không được chứa số, chỉ cho phép chữ cái và dấu cách.");
+      return false;
+    }
+
+    alert("Đăng ký thành công!");
+    setTimeout(function() {
+      window.location.href = "login.html";
+    }, 1500);
+
+    return false;
+  }
+</script>
+
+</body>
+</html>

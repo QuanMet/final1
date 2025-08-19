@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <title>Thông tin sản phẩm</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- CSS chung của site (đã có style cho header/nav) -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome nếu cần icon -->
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- CSS riêng cho trang info (không đụng đến header/nav) -->
+  <style>
+    :root{
+      --bg:#f6efe4;--card:#fff;--border:#e9e2d9;--text:#3d2b23;--muted:#7a6a62;
+      --brand-2:#b8cc18;--shadow:0 6px 20px rgba(0,0,0,.08);--radius:14px;
+    }
+    body{background:var(--bg);}
+    .wrap{max-width:1180px;margin:24px auto;padding:0 16px}
+    .product-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;}
+    .gallery{display:flex;flex-direction:column;gap:14px}
+    .hero{border-radius:16px;overflow:hidden;border:1px solid var(--border);position:relative;aspect-ratio: 4/3;background:#faf7f3;}
+    .hero img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumbs{display:flex;gap:10px}
+    .thumb{width:120px;height:80px;border-radius:10px;overflow:hidden;border:2px solid transparent;cursor:pointer}
+    .thumb img{width:100%;height:100%;object-fit:cover}
+    .thumb.active{border-color:#2b7cff}
+    .info h1{margin:0 0 4px;font-size:28px;font-weight:800}
+    .sku{color:var(--muted);margin-bottom:10px}
+    .divider{height:1px;background:var(--border);margin:14px 0 12px}
+    .price{font-size:22px;font-weight:800}
+    .chips{display:flex;flex-wrap:wrap;gap:10px;margin:6px 0 14px}
+    .chip{padding:10px 14px;border:1px solid #dccfc6;border-radius:999px;background:#f7f4f1;cursor:pointer;color:#5a3a30;font-weight:600}
+    .chip.active{background:#fff1f0;border-color:#e3b5b3}
+    .qty-row{display:flex;align-items:center;gap:10px;margin:6px 0 18px}
+    .stepper{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+    .stepper button{width:36px;height:36px;border:0;background:#f4efe9;cursor:pointer;font-size:18px}
+    .stepper input{width:54px;height:36px;border:0;text-align:center;font-size:16px}
+    .actions{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{border:0;border-radius:12px;padding:14px 18px;cursor:pointer;font-weight:800;letter-spacing:.3px;box-shadow:var(--shadow)}
+    .btn-cart{background:#3a231c;color:#fff}
+    .btn-buy{background:var(--brand-2);color:#2c2c05}
+    .tabs{margin-top:18px}
+    .tab-headers{display:flex;gap:8px;margin-bottom:10px}
+    .tab-btn{padding:10px 18px;border-radius:10px;border:0;background:#3e241d;color:#fff;font-weight:800;cursor:pointer}
+    .tab-btn.secondary{background:#eee2da;color:#5e4c44}
+    .tab-content{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px}
+    .desc{line-height:1.7}
+    @media (max-width:900px){.product-card{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const accountLink = document.getElementById('account-link');
+    const accountText = document.getElementById('account-text');
+
+    if (isLoggedIn === 'true') {
+      accountText.textContent = 'Đăng xuất';
+      accountLink.setAttribute('href', 'logout.html');
+    } else {
+      accountText.textContent = 'Tài khoản';
+      accountLink.setAttribute('href', 'login.html');
+    }
+  });
+</script>
+  <!-- Header top -->
+<header class="header-top">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.jpg" alt="Bakery" height="50">
+        </a>
+      </div>
+
+      <div class="search-box">
+        <input type="text" placeholder="Tìm kiếm...">
+        <button><i class="fas fa-search"></i></button>
+      </div>
+      <div class="contact">
+        <i class="fas fa-phone"></i> 0912255220
+      </div>
+<div class="account">
+  <a href="#" id="account-link">
+    <i class="fas fa-user"></i> <span id="account-text">Tài khoản</span>
+  </a> |
+  <a href="checkout.html"><i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)</a>
+</div>
+    </div>
+  </header>
+
+
+  <!-- Navigation -->
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Trang chủ</a></li>
+    <li><a href="menu.html">Bánh Mỳ</a></li>
+    <li><a href="menu2.html">Bánh sinh nhật</a></li>
+    <li><a href="menu3.html">Bánh Ngọt</a></li>
+
+    <li class="has-dropdown">
+      <a href="menu4.html">Cookies &amp; Minicake</a>
+      <ul class="dropdown">
+        <li><a href="menu5.html">Cookies</a></li>
+        <li><a href="menu6.html">Mini Cake</a></li>
+        <li><a href="menu7.html">Petit</a></li>
+        <li><a href="menu8.html">Caramen</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  <!-- Nội dung trang info -->
+  <div class="wrap">
+    <section class="product-card">
+      <!-- LEFT: Gallery -->
+      <div class="gallery">
+        <div class="hero"><img id="hero-img" src="" alt=""></div>
+        <div class="thumbs" id="thumbs"></div>
+      </div>
+
+      <!-- RIGHT: Info -->
+      <div class="info">
+        <h1 id="p-title">Tên sản phẩm</h1>
+        <div class="sku" id="p-sku">Mã sản phẩm: …</div>
+        <div class="divider"></div>
+
+        <div class="price-row">
+          <span class="price" id="p-price">…</span><span style="color:#777"> /</span>
+        </div>
+
+        <div class="label" style="margin:6px 0 6px;font-weight:800;color:#6a5a51">Tiêu đề</div>
+        <div class="chips" id="variants">
+          <button class="chip active" data-variant="90g">Matcha</button>
+          <button class="chip" data-variant="120g">ChocoLate</button>
+          <button class="chip" data-variant="180g">Vani</button>
+          <button class="chip" data-variant="200g">Mint</button>
+        </div>
+
+        <div class="qty-row">
+          <div class="label" style="font-weight:800;color:#6a5a51">Số lượng:</div>
+          <div class="stepper">
+            <button type="button" id="minus">−</button>
+            <input type="number" id="qty" value="1" min="1">
+            <button type="button" id="plus">+</button>
+          </div>
+        </div>
+
+        <!-- THAY 2 khối hiện tại bằng khối gộp -->
+<div class="cta-row">
+  <div class="actions">
+    <button class="btn btn-cart">THÊM VÀO GIỎ HÀNG</button>
+    <button class="btn btn-buy"> <a href="checkout.html"> MUA NGAY </a> </button>
+  </div>
+</div>
+
+    </section>
+
+    <!-- Tabs -->
+    <section class="tabs">
+      <div class="tab-headers">
+        <button class="tab-btn" data-tab="about">MÔ TẢ CHUNG</button>
+        <button class="tab-btn secondary" data-tab="comment">BÌNH LUẬN</button>
+      </div>
+      <div class="tab-content">
+        <div id="tab-about" class="desc">
+          <h3 style="margin:0 0 6px">Các vị nhân bánh:</h3>
+          <ul style="margin:8px 0 14px">
+            <li>Bánh được làm thủ công</li>
+            <li>Vị bánh có sẵn tại mỗi cơ sở có thể khác nhau. Quý khách vui lòng liên hệ hotline hoặc cửa hàng để tư vấn chi tiết.</li>
+          </ul>
+          <p id="p-desc" style="margin:0"></p>
+        </div>
+        <div id="tab-comment" style="display:none">
+          <p>Chưa có bình luận. Hãy là người đầu tiên nhận xét sản phẩm này!</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Đọc dữ liệu từ query string (Cách A)
+    const qs   = new URLSearchParams(location.search);
+    const name = qs.get("name");
+    const price= qs.get("price");
+    const img  = qs.get("img");
+    const desc = qs.get("desc") || "";
+    const sku  = qs.get("sku") || "";
+
+    document.getElementById("p-title").textContent = name || "Tên sản phẩm";
+    document.getElementById("p-sku").textContent   = sku ? ("Mã sản phẩm: " + sku) : "Mã sản phẩm: …";
+    document.getElementById("p-price").textContent = price || "…";
+    document.getElementById("p-desc").textContent  = desc;
+
+    const hero = document.getElementById("hero-img");
+    hero.src = img || "";
+    hero.alt = name || "Sản phẩm";
+
+    
+    const thumbs = document.getElementById("thumbs");
+    const list = [img, img, img, img, img].filter(Boolean);
+    list.forEach((src, i) => {
+      const t = document.createElement("div");
+      t.className = "thumb" + (i===0 ? " active" : "");
+      t.innerHTML = `<img src="${src}" alt="thumb ${i+1}">`;
+      t.addEventListener("click", () => {
+        document.querySelectorAll(".thumb").forEach(x => x.classList.remove("active"));
+        t.classList.add("active");
+        hero.src = src;
+      });
+      thumbs.appendChild(t);
+    });
+
+    // Chips chọn variant
+    document.querySelectorAll(".chip").forEach(chip=>{
+      chip.addEventListener("click", ()=>{
+        document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+        chip.classList.add("active");
+      });
+    });
+
+    // Stepper số lượng
+    const qty = document.getElementById("qty");
+    document.getElementById("minus").onclick = ()=> qty.value = Math.max(1, (+qty.value||1) - 1);
+    document.getElementById("plus").onclick  = ()=> qty.value = (+qty.value||1) + 1;
+
+    // Tabs
+    const aboutBtn = document.querySelector('[data-tab="about"]');
+    const cmtBtn   = document.querySelector('[data-tab="comment"]');
+    const aboutTab = document.getElementById("tab-about");
+    const cmtTab   = document.getElementById("tab-comment");
+    const setTab = (tab)=>{
+      if(tab==="about"){
+        aboutBtn.classList.remove("secondary");
+        cmtBtn.classList.add("secondary");
+        aboutTab.style.display="block";
+        cmtTab.style.display="none";
+      }else{
+        cmtBtn.classList.remove("secondary");
+        aboutBtn.classList.add("secondary");
+        cmtTab.style.display="block";
+        aboutTab.style.display="none";
+      }
+    };
+    aboutBtn.onclick=()=>setTab("about");
+    cmtBtn.onclick=()=>setTab("comment");
+  </script>
+
+
+
+<!-- cart-core begin -->
+<script>
+(function(){
+  function parsePrice(v){ return Number(String(v||'').replace(/[^\d]/g,''))||0; }
+  function loadCart(){ try { return JSON.parse(localStorage.getItem('cart')||'[]'); } catch(e){ return []; } }
+  function saveCart(c){ localStorage.setItem('cart', JSON.stringify(c)); updateCartBadge(); }
+  function cartCount(){ return loadCart().reduce((s,i)=>s + (i.qty||0), 0); }
+  function money(n){ try { return (n||0).toLocaleString('vi-VN') + '₫'; } catch(e){ return String(n) + '₫'; } }
+  function updateCartBadge(){
+    var count = cartCount();
+    document.querySelectorAll('#cart-count').forEach(function(el){ el.textContent = count; });
+  }
+  window.CartCore = { parsePrice: parsePrice, loadCart: loadCart, saveCart: saveCart, updateCartBadge: updateCartBadge, money: money };
+  window.addToCart = function(item){
+    var cart = loadCart();
+    var key = (item.sku||item.name||'') + '|' + (item.variant||'');
+    var found = cart.find(function(x){ return x.key === key; });
+    if(found){ found.qty = (found.qty||0) + (item.qty||1); }
+    else { item.key = key; cart.push(item); }
+    saveCart(cart);
+    alert('Đã thêm vào giỏ (' + cartCount() + ')');
+  };
+  document.addEventListener('DOMContentLoaded', updateCartBadge);
+})();
+</script>
+<!-- cart-core end -->
+
+<!-- cart add-from-info -->
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.querySelector('.btn.btn-cart');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var qtyEl = document.getElementById('qty');
+      var qty = Math.max(1, parseInt((qtyEl && qtyEl.value) || '1', 10));
+      var variant = (document.querySelector('.chip.active') || {}).dataset?.variant || '';
+      var name = (document.getElementById('p-title') || {}).textContent || '';
+      name = name.trim();
+      var priceText = (document.getElementById('p-price') || {}).textContent || '';
+      priceText = priceText.trim();
+      var img = (document.getElementById('hero-img') || {}).src || '';
+      var sku = ((document.getElementById('p-sku') || {}).textContent || '').replace('Mã sản phẩm:', '').trim() || (name.split(' ')[0]||name);
+      addToCart({ sku: sku, name: name, img: img, variant: variant, price: CartCore.parsePrice(priceText), priceText: priceText, qty: qty });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

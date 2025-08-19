@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu | HEHE Bakery</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chỉ cần 1 link Font Awesome là đủ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header top -->
+  <header class="header-top">
+    <div class="container">
+<div class="logo">
+  <a href="index.html">
+    <img src="logo.jpg" alt="Bakery" height="50">
+  </a>
+</div>
+
+
+
+
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm...">
+  <button onclick="searchProducts()"><i class="fas fa-search"></i></button>
+</div>
+
+      <div class="contact">
+        <i class="fas fa-phone"></i> 0912255220
+      </div>
+
+<div class="account">
+  <a href="#" id="account-link">
+    <i class="fas fa-user"></i> <span id="account-text">Tài khoản</span>
+  </a> |
+  <a href="checkout.html"><i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)</a>
+</div>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Trang chủ</a></li>
+    <li><a href="menu.html">Bánh Mỳ</a></li>
+    <li><a href="menu2.html">Bánh sinh nhật</a></li>
+    <li><a href="menu3.html">Bánh Ngọt</a></li>
+
+    <li class="has-dropdown">
+      <a href="menu4.html">Cookies &amp; Minicake</a>
+      <ul class="dropdown">
+        <li><a href="menu5.html">Cookies</a></li>
+        <li><a href="menu6.html">Mini Cake</a></li>
+        <li><a href="menu7.html">Petit</a></li>
+        <li><a href="menu8.html">Caramen</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  <!-- BẮT ĐẦU PHẦN NỘI DUNG -->
+  <main class="page-main">
+    <div>
+      <h5 class="title">Danh mục sản phẩm</h5>
+    </div>
+
+    <div class="product-grid">
+      <!-- Sản phẩm 1 -->
+      <div class="product-card">
+        <img src="banhdau.jpg" alt="" />
+        <h3>ND01</h3>
+        <p>Bánh Dâu Âu Yếm </p>
+        <span class="price">48.000₫</span>
+        <button class="open-modal-btn"
+          data-name="Bánh Dâu Âu Yếm"
+          data-price="48.000₫"
+          data-img="">Xem chi tiết</button>
+      </div>
+
+      <!-- Sản phẩm 2 -->
+      <div class="product-card">
+        <img src="banhsinhnhat.jpg" alt="Bánh Sừng Bò">
+        <h3>ND120</h3>
+        <p>Bánh Sinh Nhật Original</p>
+        <span class="price">395.000₫</span>
+        <button class="open-modal-btn"
+          data-name="Bánh Sinh Nhật Original"
+          data-price="395.000₫"
+          data-img="banhsinhnhat.jpg">Xem chi tiết</button>
+      </div>
+
+      <!-- Sản phẩm 3 -->
+      <div class="product-card">
+        <img src="socola.jpg" alt="ND180">
+        <h3>ND180</h3>
+        <p> Socola Must Try </p>
+        <span class="price">650.000₫</span>
+        <button class="open-modal-btn"
+          data-name="Socola Must Buy"
+          data-price="650.000₫"
+          data-img="socola.jpg">Xem chi tiết</button>
+      </div>
+
+      <!-- Sản phẩm 4 -->
+      <div class="product-card">
+        <img src="vietquat.jpg" alt="ND200">
+        <h3>ND200</h3>
+        <p>Bánh Kem Việt Quất</p>
+        <span class="price">200.000₫</span>
+        <button class="open-modal-btn"
+          data-name="Bánh Kem Việt Quất"
+          data-price="200.000₫"
+          data-img="vietquat.jpg">Xem chi tiết</button>
+      </div>
+    </div>
+  </main>
+  <!-- KẾT THÚC PHẦN NỘI DUNG -->
+
+  <!-- Footer -->
+    <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>Về Méli's dessert</h4>
+        <p>Méli's Bakery được Madam Yuan sáng lập tại Hà Nội với tình yêu dành cho bánh mì Pháp.
+Mỗi ổ bánh được làm thủ công từ nguyên liệu chọn lọc và công thức truyền thống.
+Chúng tôi mang đến hương vị Pháp tinh tế, chan hòa giữa lòng Hà Nội.</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Liên hệ</h4>
+        <p><i class="fas fa-map-marker-alt"></i> 130 Xuân Thuỷ, Hà Nội</p>
+        <p><i class="fas fa-phone"></i> 0912255220</p>
+        <p><i class="fas fa-envelope"></i> met21080072@hsb.edu.vn</p>
+      </div>
+
+      <div class="footer-column">
+        <h4>Liên kết nhanh</h4>
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="menu.html">Bánh mỳ</a></li>
+          <li><a href="menu2.html">Bánh sinh nhật</a></li>
+          <li><a href="menu3.html">Bánh ngọt</a></li>
+          <li><a href="#">Cookies & Minicake</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Kết nối với chúng tôi</h4>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/share/169NU9MPxf/?mibextid=wwXIfr" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/melis_dessert?igsh=bXc3eThtanFldjJm" target="_blank">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; Méli's Bakery Việt Nam</p>
+    </div>
+  </footer>
+
+
+<script src="main.js" defer></script>
+
+<script>
+  function searchProducts() {
+    const keyword = document.getElementById("searchInput").value.toLowerCase();
+    const products = document.querySelectorAll(".product-card");
+
+    products.forEach((product) => {
+      const name = product.querySelector("h3").innerText.toLowerCase();
+      const description = product.querySelector("p").innerText.toLowerCase();
+
+      if (name.includes(keyword) || description.includes(keyword)) {
+        product.style.display = "block";
+      } else {
+        product.style.display = "none";
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("searchInput");
+    if (input) {
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          searchProducts();
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

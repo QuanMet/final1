@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi"> <!-- Xác định ngôn ngữ của trang web là tiếng Việt -->
+<head>
+  <meta charset="UTF-8"> <!-- Đảm bảo mã hóa ký tự là UTF-8 để hỗ trợ tiếng Việt -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Hiển thị tốt trên di động -->
+  <title>Đăng nhập</title> <!-- Tiêu đề trang -->
+
+  <!-- Liên kết đến các tệp CSS -->
+  <link rel="stylesheet" href="style-desktop.css">
+  <link rel="stylesheet" href="style-mobile.css" media="(max-width: 480px)">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- CSS để thêm hình nền -->
+  <style>
+  body.login-body {
+    background-image: url('background-login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  body.login-body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 240, 200, 0.3); /* phủ lớp vàng nhạt */
+    z-index: -1;
+  }
+
+  .login-box {
+    background-color: rgba(255, 255, 245, 0.92);
+    padding: 32px 28px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .login-box h2 {
+    color: #5a3e2b;
+    margin-bottom: 20px;
+  }
+
+  .input-group label {
+    color: #5a3e2b;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 6px;
+    display: block;
+    text-align: left;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cdb79e;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+
+  .btn.login-btn {
+    background-color: #8c5e38;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .btn.login-btn:hover {
+    background-color: #6f472a;
+  }
+
+  .forgot-password a {
+    font-size: 13px;
+    color: #8c5e38;
+    text-decoration: none;
+  }
+
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+
+  .divider span {
+    color: #777;
+    font-size: 13px;
+  }
+
+  .create-account-btn {
+    background-color: #d3a762;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+  }
+
+  .create-account-btn:hover {
+    background-color: #b68e4e;
+  }
+</style>
+</head>
+
+<body class="login-body fade-in"> <!-- Áp dụng hiệu ứng và nền -->
+  <!-- Form đăng nhập -->
+  <div class="login-container">
+    <div class="login-box">
+      <h2>Đăng nhập</h2> <!-- Tiêu đề của form đăng nhập -->
+      <form id="login-form" method="post" onsubmit="login(); return false;" class="form-content">
+        <!-- Trường nhập email hoặc số điện thoại -->
+        <div class="input-group">
+          <label for="email">Email hoặc số điện thoại</label>
+          <input type="text" id="email" placeholder="Nhập email hoặc số điện thoại" required>
+        </div>
+
+        <!-- Trường nhập mật khẩu -->
+        <div class="input-group">
+          <label for="password">Mật khẩu</label>
+          <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+        </div>
+
+        <!-- Nút gửi form đăng nhập -->
+        <button type="submit" class="btn login-btn">Đăng nhập</button>
+
+        <!-- Liên kết "Quên mật khẩu?" -->
+        <div class="forgot-password">
+          <a href="#">Quên mật khẩu?</a>
+        </div>
+
+        <!-- Dòng phân cách -->
+        <div class="divider">
+          <span>hoặc</span>
+        </div>
+
+        <!-- Liên kết "Tạo tài khoản mới" -->
+        <div class="forgot-password">
+          <a href="register.html" class="create-account-btn">Tạo tài khoản mới</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- JavaScript xử lý đăng nhập -->
+  <script>
+    function login() {
+      localStorage.setItem('isLoggedIn', 'true');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

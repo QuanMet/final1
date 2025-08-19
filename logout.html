@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng xuất</title>
+
+    <!-- Liên kết đến các tệp CSS cho desktop và mobile -->
+    <link rel="stylesheet" href="style-desktop.css">
+    <link rel="stylesheet" href="style-mobile.css" media="(max-width: 480px)">
+</head>
+<body>
+
+    <!-- Trường hợp nếu người dùng vào mà trình duyệt chưa chuyển ngay -->
+    <div class="logout-container">
+        <h2>Đang đăng xuất...</h2>
+        <a href="index.html" class="btn login-btn">Quay lại Trang chủ</a>
+    </div>
+
+    <!-- JavaScript xử lý đăng xuất -->
+    <script>
+        window.onload = function () {
+            // Xóa trạng thái đăng nhập khỏi localStorage
+            localStorage.removeItem('isLoggedIn');
+
+            // Chuyển hướng người dùng về trang chủ sau 500ms
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
+        };
+    </script>
+</body>
+</html>

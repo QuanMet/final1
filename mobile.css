@@ -1,0 +1,110 @@
+/* Mobile-first responsive design (iPhone 11 - 16 & tương đương Android) */
+
+@media screen and (max-width: 768px) {
+
+  /* Header top */
+  .header-top .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo img {
+    height: 60px;
+  }
+
+  .search-box {
+    width: 90%;
+  }
+
+  .search-box input {
+    width: 80%;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .search-box button {
+    padding: 8px 12px;
+  }
+
+  .contact, .account {
+    font-size: 15px;
+  }
+
+  .account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* Navbar */
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .navbar li {
+    margin: 0;
+  }
+
+  /* Slider */
+  .hero-slider img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Product grid */
+  .product-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Footer */
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  /* Modal */
+  .modal-content {
+    width: 95%;
+    height: auto;
+    max-height: 90%;
+    overflow-y: auto;
+  }
+
+  .modal-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .modal-info {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Button sizes */
+  button, .open-modal-btn {
+    padding: 10px;
+    font-size: 16px;
+  }
+}

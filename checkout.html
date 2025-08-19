@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thanh toán | HEHE Bakery</title>
+  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+
+  <!-- Mini CSS chỉ cho trang checkout -->
+  <style>
+    :root{--ink:#222;--muted:#6b7280;--line:#eee;--brand:#d0021b;--bg:#fdf9f6;--card:#fff}
+    body{background:var(--bg);color:var(--ink)}
+    .checkout-grid{max-width:1100px;margin:28px auto;padding:0 16px;display:grid;grid-template-columns:1.5fr 1fr;gap:24px;align-items:start}
+    @media(max-width:900px){.checkout-grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+    .card .card-hd{padding:16px 18px;border-bottom:1px solid var(--line);font-weight:800}
+    .card .card-bd{padding:18px}
+    .field{margin-bottom:14px}
+    .field label{display:block;font-weight:600;margin-bottom:6px}
+    .field input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;outline:none;transition:box-shadow .2s,border-color .2s;background:#fff}
+    .field input:focus{border-color:#caa;box-shadow:0 0 0 3px rgba(208,2,27,.08)}
+    .muted{color:var(--muted);font-size:.92rem}
+    .add-to-cart-btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:12px 16px;font-weight:800;cursor:pointer}
+    .add-to-cart-btn:hover{filter:brightness(.95)}
+    .order-sidebar{position:sticky;top:16px}
+    .order-sidebar table{width:100%;border-collapse:collapse}
+    .order-sidebar th,.order-sidebar td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+    .order-sidebar th{text-align:left;color:var(--muted);font-weight:700}
+    .order-sidebar td:last-child,.order-sidebar th:last-child{text-align:right}
+    .order-totals{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+    .order-totals div{display:flex;justify-content:space-between}
+    .thumb{width:48px;height:48px;border-radius:6px;object-fit:cover;border:1px solid var(--line);margin-right:10px}
+    .row-flex{display:flex;align-items:center}
+    .back-link{display:inline-block;margin-top:10px;color:#0a7;text-decoration:none;font-weight:600}
+    .back-link:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+
+  <!-- Header top -->
+  <header class="header-top">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="logo.jpg" alt="Bakery" height="50">
+        </a>
+      </div>
+
+<form action="search.html" method="get" class="search-box">
+  <input type="text" name="q" placeholder="Tìm kiếm sản phẩm..." required>
+  <button type="submit"><i class="fas fa-search"></i></button>
+</form>
+
+      <div class="contact">
+        <i class="fas fa-phone"></i> 0912255220
+      </div>
+<div class="account">
+  <a href="#" id="account-link">
+    <i class="fas fa-user"></i> <span id="account-text">Tài khoản</span>
+  </a> |
+  <a href="checkout.html"><i class="fas fa-shopping-cart"></i> (<span id="cart-count">0</span>)</a>
+</div>
+    </div>
+  </header>
+
+
+  <!-- Navigation -->
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Trang chủ</a></li>
+    <li><a href="menu.html">Bánh Mỳ</a></li>
+    <li><a href="menu2.html">Bánh sinh nhật</a></li>
+    <li><a href="menu3.html">Bánh Ngọt</a></li>
+
+    <li class="has-dropdown">
+      <a href="menu4.html">Cookies &amp; Minicake</a>
+      <ul class="dropdown">
+        <li><a href="menu5.html">Cookies</a></li>
+        <li><a href="menu6.html">Mini Cake</a></li>
+        <li><a href="menu7.html">Petit</a></li>
+        <li><a href="menu8.html">Caramen</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  <!-- Main -->
+  <main class="checkout-grid">
+    <!-- LEFT: form -->
+    <section class="card">
+      <div class="card-hd">Thông tin thanh toán</div>
+      <div class="card-bd">
+        <form id="checkoutForm" novalidate>
+          <h3>Thông tin giao hàng</h3>
+          <div class="field"><label>Họ tên</label><input id="ship_name" required data-errmsg="Nhập họ tên"></div>
+          <div class="field"><label>Điện thoại</label><input id="ship_phone" required pattern="^0\\d{9,10}$" data-errmsg="SĐT 10-11 số, bắt đầu 0"></div>
+          <div class="field"><label>Địa chỉ</label><input id="ship_address" required data-errmsg="Nhập địa chỉ"></div>
+
+          <label class="muted" style="display:block;margin:12px 0 18px;">
+            <input type="checkbox" id="sameAsShipping" checked> Dùng <strong>địa chỉ giao hàng</strong> cho thanh toán
+          </label>
+
+          <h3>Địa chỉ thanh toán</h3>
+          <div class="field"><label>Họ tên</label><input id="bill_name" required></div>
+          <div class="field"><label>Điện thoại</label><input id="bill_phone" required pattern="^0\\d{9,10}$"></div>
+          <div class="field"><label>Địa chỉ</label><input id="bill_address" required></div>
+
+          <h3>Phương thức thanh toán</h3>
+          <div class="field">
+          <label><input type="radio" name="paymentMethod" value="bank" checked> Chuyển khoản</label><br>
+          <label><input type="radio" name="paymentMethod" value="cash"> Tiền mặt</label>
+          </div>
+          <!-- ✅ QR Code chuyển khoản -->
+          <div id="qr-code" style="margin-top: 16px;">
+            <p>Vui lòng quét mã QR để chuyển khoản:</p>
+            <img src="qr-code.jpg" alt="QR chuyển khoản" style="width:200px;max-width:100%">
+          </div>
+
+          <button type="submit" class="add-to-cart-btn">Đặt hàng</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- RIGHT: order summary -->
+    <aside class="card order-sidebar">
+      <div class="card-hd">Đơn hàng</div>
+      <div class="card-bd">
+        <section id="cartView"></section>
+        <a class="back-link" href="menu.html">+ Thêm sản phẩm</a>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h4>Về Méli's dessert</h4>
+      <p>Méli's Bakery được Madam Yuan sáng lập tại Hà Nội với tình yêu dành cho bánh mì Pháp.
+Mỗi ổ bánh được làm thủ công từ nguyên liệu chọn lọc và công thức truyền thống.
+Chúng tôi mang đến hương vị Pháp tinh tế, chan hòa giữa lòng Hà Nội.
+      </p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Liên hệ</h4>
+      <p><i class="fas fa-map-marker-alt"></i> 130 Xuân Thuỷ, Hà Nội</p>
+      <p><i class="fas fa-phone"></i> 0912255220</p>
+      <p><i class="fas fa-envelope"></i> met21080072@hsb.edu.vn</p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Liên kết nhanh</h4>
+      <ul>
+        <li><a href="#">Trang chủ</a></li>
+        <li><a href="menu.html">Bánh mỳ</a></li>
+        <li><a href="menu2.html">Bánh sinh nhật</a></li>
+        <li><a href="#">Bánh ngọt</a></li>
+        <li><a href="#">Cookies & Minicake</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Kết nối với chúng tôi</h4>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/share/169NU9MPxf/?mibextid=wwXIfr" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/melis_dessert?igsh=bXc3eThtanFldjJm" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; Méli's Bakery Việt Nam</p>
+  </div>
+</footer>
+
+  <script src="main.js" defer></script>
+
+  <!-- Cart render + form helpers -->
+  <script>
+  (function(){
+    function parsePrice(v){ return Number(String(v||'').replace(/[^\\d]/g,''))||0; }
+    function loadCart(){ try { return JSON.parse(localStorage.getItem('cart')||'[]'); } catch(e){ return []; } }
+    function saveCart(c){ localStorage.setItem('cart', JSON.stringify(c)); updateCartBadge(); }
+    function money(n){ try { return (n||0).toLocaleString('vi-VN') + '₫'; } catch(e){ return String(n) + '₫'; } }
+    function updateCartBadge(){
+      var count = loadCart().reduce(function(s,i){return s + (i.qty||0);}, 0);
+      document.querySelectorAll('#cart-count').forEach(function(el){ el.textContent = count; });
+    }
+
+    function renderCart(){
+      var wrap = document.getElementById('cartView');
+      if(!wrap) return;
+      var cart = loadCart();
+      if(cart.length === 0){
+        wrap.innerHTML = '<div class="muted">Giỏ hàng đang trống. <a href="index.html">Tiếp tục mua sắm</a></div>';
+        return;
+      }
+      var rows = cart.map(function(it, idx){
+        var name = (it.name||'') + (it.variant ? ' - ' + it.variant : '');
+        return (
+          '<tr>' +
+            '<td><div class="row-flex"><img class="thumb" src="'+(it.img||'')+'" alt=""><div><div style="font-weight:700">'+name+'</div><div class="muted">'+(it.sku||'')+'</div></div></div></td>' +
+            '<td>'+ money(it.price||0) +'</td>' +
+            '<td style="text-align:center"><input type="number" min="1" value="'+(it.qty||1)+'" data-index="'+idx+'" class="qty-input" style="width:64px"></td>' +
+            '<td>'+ money((it.price||0)*(it.qty||1)) +'</td>' +
+            '<td style="text-align:center"><button data-index="'+idx+'" class="remove" type="button">Xóa</button></td>' +
+          '</tr>'
+        );
+      }).join('');
+      var subtotal = cart.reduce(function(s,i){ return s + (i.price||0)*(i.qty||1); }, 0);
+      wrap.innerHTML =
+        '<table>' +
+          '<thead><tr><th>Sản phẩm</th><th>Đơn giá</th><th style="text-align:center">SL</th><th>Thành tiền</th><th></th></tr></thead>' +
+          '<tbody>'+ rows +'</tbody>' +
+        '</table>' +
+        '<div class="order-totals">' +
+          '<div><span class="muted">Tạm tính</span><strong>'+money(subtotal)+'</strong></div>' +
+          '<div><span class="muted">Phí vận chuyển</span><strong>'+money(0)+'</strong></div>' +
+          '<div style="font-size:1.05rem"><strong>Tổng cộng</strong><strong id="grandTotal">'+money(subtotal)+'</strong></div>' +
+        '</div>';
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      renderCart(); updateCartBadge();
+
+      var wrap = document.getElementById('cartView');
+      if(wrap){
+        wrap.addEventListener('change', function(e){
+          if(e.target && e.target.classList.contains('qty-input')){
+            var idx = +e.target.dataset.index;
+            var qty = Math.max(1, parseInt(e.target.value||'1',10));
+            var cart = loadCart(); if(cart[idx]){ cart[idx].qty = qty; saveCart(cart); renderCart(); }
+          }
+        });
+        wrap.addEventListener('click', function(e){
+          var t = e.target;
+          if(t && t.classList.contains('remove')){
+            var idx = +t.dataset.index;
+            var cart = loadCart(); cart.splice(idx,1); saveCart(cart); renderCart();
+          }
+        });
+      }
+
+      // Copy shipping -> billing (CHỈ 3 TRƯỜNG)
+      var same = document.getElementById('sameAsShipping');
+      function syncBilling(disabled){
+        ['name','phone','address'].forEach(function(k){
+          var s = document.getElementById('ship_'+k);
+          var b = document.getElementById('bill_'+k);
+          if(!s||!b) return;
+          if(disabled){ b.value = s.value; b.setAttribute('disabled','disabled'); }
+          else { b.removeAttribute('disabled'); }
+        });
+      }
+      if(same){
+        syncBilling(true);
+        same.addEventListener('change', function(){ syncBilling(this.checked); });
+        ['ship_name','ship_phone','ship_address'].forEach(function(id){
+          var el = document.getElementById(id);
+          if(el) el.addEventListener('input', function(){ if(same.checked) syncBilling(true); });
+        });
+      }
+
+      // Format số thẻ
+      var card = document.getElementById('cardNumber');
+      var msg  = document.getElementById('cardMessage');
+      function detectBrand(d){
+        if(/^3[47]/.test(d)) return {brand:'American Express', length:15, fmt:[4,6,5]};
+        if(/^4/.test(d))    return {brand:'Visa', length:16, fmt:[4,4,4,4]};
+        if(/^(5[1-5]|2(2[2-9]|[3-6]\\d|7[01]|720))/.test(d)) return {brand:'Mastercard', length:16, fmt:[4,4,4,4]};
+        return {brand:'Thẻ', length:16, fmt:[4,4,4,4]};
+      }
+      function beautify(d, fmt){
+        var out=[], i=0; fmt.forEach(function(n){ if(i<d.length){ out.push(d.slice(i, i+n)); i+=n; }});
+        if(i<d.length) out.push(d.slice(i));
+        return out.filter(Boolean).join(' ');
+      }
+      if(card){
+        card.addEventListener('input', function(){
+          var digits = this.value.replace(/\\D/g,'').slice(0,19);
+          var info = detectBrand(digits);
+          var max = info.length; digits = digits.slice(0, max);
+          this.value = beautify(digits, info.fmt);
+          msg.textContent = info.brand + ' • còn ' + (max - digits.length) + ' số';
+        });
+      }
+
+      // Submit
+      var form = document.getElementById('checkoutForm');
+      if(form){
+        form.addEventListener('submit', function(ev){
+          ev.preventDefault();
+          var cart = loadCart();
+          if(!cart.length){ alert('Giỏ hàng đang trống.'); return; }
+          alert('Đặt hàng thành công! Cảm ơn bạn đã mua sắm tại HEHE Bakery.');
+          localStorage.removeItem('cart'); updateCartBadge();
+          window.location.href = 'index.html';
+        });
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
